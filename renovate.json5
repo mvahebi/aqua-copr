@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^aqua\\.spec$/"],
+      "matchStrings": ["Version:\\s+(?<currentValue>\\S+)"],
+      "depNameTemplate": "aquaproj/aqua",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v(?<version>.*)$"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDepNames": ["aquaproj/aqua"],
+      "automerge": true,
+      "automergeType": "branch",
+      "schedule": ["at any time"]
+    }
+  ]
+}
