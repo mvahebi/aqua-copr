@@ -14,9 +14,6 @@ dnf install aqua
 
 - [`aqua.spec`](aqua.spec) builds the upstream release tarball from
   `aquaproj/aqua` tags.
-- [`renovate.json5`](renovate.json5) tracks upstream GitHub releases and
-  automatically bumps the `Version:` field in `aqua.spec`, automerging the
-  change to `main`.
 - A push to `main` triggers COPR's webhook, which rebuilds and publishes the
   updated package.
 

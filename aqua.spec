@@ -6,9 +6,9 @@ License:        MIT
 URL:            https://github.com/aquaproj/aqua
 Source0:        https://github.com/aquaproj/aqua/archive/refs/tags/v%{version}.tar.gz
 
-# aqua's go.mod pulls in many third-party modules; the COPR project must have
-# networking enabled so `go build` can fetch them via the module proxy.
-BuildRequires:  golang >= 1.27.1
+BuildRequires:  golang
+
+%undefine _debugsource_packages
 
 %description
 A declarative CLI version manager written in Go. Aqua supports lazy
@@ -21,10 +21,11 @@ version switching.
 %build
 export CGO_ENABLED=0
 export GOFLAGS="-trimpath"
-go build -buildvcs=false -ldflags "-X main.version=v%{version}" -o aqua ./cmd/aqua
+export GOTOOLCHAIN=auto
+go build -buildvcs=false -ldflags "-X main.version=v%{version}" -o out/aqua ./cmd/aqua
 
 %install
-install -Dpm0755 aqua %{buildroot}%{_bindir}/aqua
+install -Dpm0755 out/aqua %{buildroot}%{_bindir}/aqua
 
 %check
 %{buildroot}%{_bindir}/aqua --version

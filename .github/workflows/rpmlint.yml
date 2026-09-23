@@ -1,0 +1,20 @@
+name: rpmlint
+
+on:
+  push:
+    paths: ["aqua.spec"]
+  pull_request:
+    paths: ["aqua.spec"]
+
+jobs:
+  rpmlint:
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install rpmlint
+        run: dnf install -y rpmlint
+
+      - name: Run rpmlint
+        run: rpmlint aqua.spec
