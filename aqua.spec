@@ -1,5 +1,5 @@
 Name:           aqua
-Version:        2.64.0
+Version:        2.65.2
 Release:        1%{?dist}
 Summary:        Declarative CLI version manager
 License:        MIT
